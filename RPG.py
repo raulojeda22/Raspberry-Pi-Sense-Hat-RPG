@@ -26,6 +26,7 @@ def INICIAR_PANTALLA():
       sense.set_pixel(contadorX, contadorY, objecteGenerat)
       contadorX=contadorX+1
     contadorY=contadorY+1
+  sense.set_pixel(6,7,terra)
     
 def PERSONATGE():
   sense.set_pixel(posicioX, posicioY, personatge)
@@ -37,7 +38,27 @@ def GUARDAR_OBJETO(posicioX, posicioY, posicioAntiga):
   sense.set_pixel(posicioAntiga[0], posicioAntiga[1],objecteAntic)
   sense.set_pixel(7, 7, objectePosicionat)
   return objectePosicionat
+def INTELIGENCIA_ARTIFICIAL(posicioX,posicioY):
+  contadorY = 0
+  while tamanyMapaY > contadorY:
+    contadorX = 0
+    while tamanyMapaX > contadorX:
+      objecteActual=sense.get_pixel(contadorX,contadorY)
+      if objecteActual == enemic:
 
+        movimentAleatori = random.randint(0,1)
+
+        if movimentAleatori = 0:
+          if contadorX > posicioX: #esqurre
+
+          if contadorX < posicioX: #dreta
+
+        if movimentAleatori = 1:
+          
+          if contadorY > posicioY: #dalt
+
+          if contadorY < posicioY: #baix
+          
 def MOVIMENT(posicioX,posicioY):
   while True:
     posicioAntiga=(posicioX, posicioY)
@@ -80,8 +101,50 @@ def MOVIMENT(posicioX,posicioY):
           sense.set_pixel(7,7,terra)
           break
         contador=contador+1
-    sense.set_pixel(posicioX, posicioY, personatge)
+    elif accio == 'm':
+      objectePosicionat = sense.get_pixel(7, 7)
+      objecteSeleccionat = sense.get_pixel(6, 7)
+      sense.set_pixel(6,7,objectePosicionat)
+      sense.set_pixel(7,7,objecteSeleccionat)
+    
+    elif accio == '1':
+      objecteEnInventari = sense.get_pixel(0,7)
+      objecteSeleccionat = sense.get_pixel(6,7)
+      sense.set_pixel(0,7,objecteSeleccionat)
+      sense.set_pixel(6,7,objecteEnInventari)
+    elif accio == '2':
+      objecteEnInventari = sense.get_pixel(1,7)
+      objecteSeleccionat = sense.get_pixel(6,7)
+      sense.set_pixel(1,7,objecteSeleccionat)
+      sense.set_pixel(6,7,objecteEnInventari)
       
+    elif accio == '3':
+      objecteEnInventari = sense.get_pixel(2,7)
+      objecteSeleccionat = sense.get_pixel(6,7)
+      sense.set_pixel(2,7,objecteSeleccionat)
+      sense.set_pixel(6,7,objecteEnInventari)
+      
+    elif accio == '4':
+      objecteEnInventari = sense.get_pixel(3,7)
+      objecteSeleccionat = sense.get_pixel(6,7)
+      sense.set_pixel(3,7,objecteSeleccionat)
+      sense.set_pixel(6,7,objecteEnInventari)
+      
+    elif accio == '5':
+      objecteEnInventari = sense.get_pixel(4,7)
+      objecteSeleccionat = sense.get_pixel(6,7)
+      sense.set_pixel(4,7,objecteSeleccionat)
+      sense.set_pixel(6,7,objecteEnInventari)
+      
+    elif accio == '6':
+      objecteEnInventari = sense.get_pixel(5,7)
+      objecteSeleccionat = sense.get_pixel(6,7)
+      sense.set_pixel(5,7,objecteSeleccionat)
+      sense.set_pixel(6,7,objecteEnInventari)
+      
+    sense.set_pixel(posicioX, posicioY, personatge)
+
+    INTELIGENCIA_ARTIFICIAL(posicioX,posicioY)
 #sense.set_pixel(3, 3, 0, 255, 0)
 #Variables#
 personatge = (0, 0, 255)
