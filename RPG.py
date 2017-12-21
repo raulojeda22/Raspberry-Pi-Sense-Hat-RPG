@@ -1,4 +1,5 @@
 from sense_hat import SenseHat
+import numpy as np
 import random
 #Functions#
 def INICIAR_PANTALLA():
@@ -40,24 +41,54 @@ def GUARDAR_OBJETO(posicioX, posicioY, posicioAntiga):
   return objectePosicionat
 def INTELIGENCIA_ARTIFICIAL(posicioX,posicioY):
   contadorY = 0
-  while tamanyMapaY > contadorY:
+  contadorMapaY = 0
+  posicionGuardadaDeMonstruo=99999999999
+  while tamanyMapaY > contadorMapaY:
     contadorX = 0
-    while tamanyMapaX > contadorX:
-      objecteActual=sense.get_pixel(contadorX,contadorY)
-      if objecteActual == enemic:
+    contadorMapaX = 0
+    while tamanyMapaX > contadorMapaX:
+      objecteActual=sense.get_pixel(contadorMapaX,contadorMapaY)
+      enemy=np.array(enemic).tolist()
+      print(objecteActual,enemy)
+      if objecteActual == enemy:
+        print ("Hola")
+        
 
-        movimentAleatori = random.randint(0,1)
+        
+        if contadorX > posicioX: #esqurre
+          contadorX = contadorX - 1
+          if contadorX < 0:
+            contadorX=7
+            
+        if contadorX < posicioX: #dreta
+          contadorX = contadorX + 1
+          if contadorX > 7:
+            contadorX=0
+            
+        
+        if contadorY > posicioY: #dalt
+          contadorY = contadorY - 1
+          if contadorY < 0:
+            contadorY=6
+              
+        if contadorY < posicioY: #baix
+          if contadorX == posicionGuardadaDeMonstruo:
+            posicionGuardadaDeMonstruo=99999999999
+          else:
+             contadorY = contadorY + 1
+             if contadorY > 6:
+               contadorY = 0
+               posicionGuardadaDeMonstruo = contadorX
+        if posicioX == contadorX and posicioY == contadorY:
+          print ("Has mort")
+        sense.set_pixel(contadorX,contadorY,enemic)
+        sense.set_pixel(contadorMapaX,contadorMapaY,terra)
+      contadorMapaX = contadorMapaX + 1
+      contadorX = contadorMapaX
+    contadorMapaY = contadorMapaY + 1
+    contadorY = contadorMapaY
 
-        if movimentAleatori = 0:
-          if contadorX > posicioX: #esqurre
-
-          if contadorX < posicioX: #dreta
-
-        if movimentAleatori = 1:
-          
-          if contadorY > posicioY: #dalt
-
-          if contadorY < posicioY: #baix
+              
           
 def MOVIMENT(posicioX,posicioY):
   while True:
@@ -144,11 +175,11 @@ def MOVIMENT(posicioX,posicioY):
       
     sense.set_pixel(posicioX, posicioY, personatge)
 
-    INTELIGENCIA_ARTIFICIAL(posicioX,posicioY)
+    #INTELIGENCIA_ARTIFICIAL(posicioX,posicioY)
 #sense.set_pixel(3, 3, 0, 255, 0)
 #Variables#
 personatge = (0, 0, 255)
-enemic = (255, 0, 0)
+enemic = (248, 0, 0)
 armaDeFoc = (104, 104, 104)
 armaBlanca = (255, 255, 255)
 tresor = (255, 255, 0)
@@ -168,3 +199,4 @@ sense.set_pixel(7, 7, terra)
 INICIAR_PANTALLA()
 PERSONATGE()
 MOVIMENT(posicioX,posicioY)
+
